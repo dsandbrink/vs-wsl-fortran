@@ -20,7 +20,8 @@ Install the packages needed for your WSL installation to work with Visual Studio
 ```
 sudo apt install g++ gdb make ninja-build rsync zip
 ```
-For more detailed instructions see https://docs.microsoft.com/cpp/linux/download-install-and-setup-the-linux-development-workload.
+For more detailed instructions see the
+[Linux development with C++](https://docs.microsoft.com/cpp/linux/download-install-and-setup-the-linux-development-workload) documentation.
 
 In addition we need to install the `gfortran` compiler:
 ```
@@ -68,4 +69,24 @@ Now you can run the executable in a Windows PowerShell or CMD:
 Ninja is not yet supported for Fortran, so *generator* has to be set to "Unix Makefiles" instead.
 
 When cross compiling the compiler has to be specified with "-DCMAKE_Fortran_COMPILER=/usr/bin/x86_64-w64-mingw32-gfortran" in the CMake Command Arguments.
-This is not necessary when targeting Linux, in that case the default gfortran compiler is detected automatically.
+This is not necessary when targeting Linux, in that case the default `gfortran` compiler is detected automatically.
+
+### Fortran syntax highlighting in Visual Studio
+
+By default Visual Studio does not provide any syntax highlighting for Fortran code,
+but it can be added as described [here](https://docs.microsoft.com/visualstudio/ide/adding-visual-studio-editor-support-for-other-languages).
+
+First create the following folder:
+```
+%userprofile%\.vs\Extensions\Syntaxes\
+```
+
+Then download an appropriate *grammar.json* file for Fortran and store it in this folder.
+You can take for example the grammar files used by the [Modern Fortran](https://github.com/krvajal/vscode-fortran-support) plugin for VSCode,
+you just have to copy the .json files from
+
+> https://github.com/krvajal/vscode-fortran-support/tree/master/syntaxes
+
+into your Syntaxes folder.
+
+You may need to restart Visual Studio before the new highlighting becomes visible.
