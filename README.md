@@ -36,3 +36,36 @@ Select the *WSL-GCC-Debug* target, then build it.
 
 Select *vs-wsl-fortran (src\vs-wsl-fortran)* as the startup item and start it (F5).
 To see the output you might need to open the *Linux Console Window* view.
+
+## Cross-compile a Windows executable
+
+The mingw compiler can be used to create Windows binaries.
+On Debian you have to install
+```
+sudo aptitude install gfortran-mingw-w64-x86-64
+```
+
+### Build the project for Windows
+
+Select the *WSL-MINGW-Release* target and build it.
+
+After building the executable you still need to copy some DLLs into that folder.
+In the case of Debian these DLLs are provided by the mingw package:
+```sh
+cd <vs-wsl-fortran_folder>/out/build/WSL-MINGW-Release/src
+cp /usr/lib/gcc/x86_64-w64-mingw32/8.3-win32/*.dll .
+```
+
+Now you can run the executable in a Windows PowerShell or CMD:
+```psh
+.\vs-wsl-fortran.exe
+```
+
+## Notes
+
+### CMakeSettings.json
+
+Ninja is not yet supported for Fortran, so *generator* has to be set to "Unix Makefiles" instead.
+
+When cross compiling the compiler has to be specified with "-DCMAKE_Fortran_COMPILER=/usr/bin/x86_64-w64-mingw32-gfortran" in the CMake Command Arguments.
+This is not necessary when targeting Linux, in that case the default gfortran compiler is detected automatically.
