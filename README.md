@@ -21,7 +21,7 @@ Install the packages needed for your WSL installation to work with Visual Studio
 sudo apt install g++ gdb make ninja-build rsync zip
 ```
 For more detailed instructions see the
-[Linux development with C++](https://docs.microsoft.com/cpp/linux/download-install-and-setup-the-linux-development-workload) documentation.
+[Linux development with C++ documentation](https://docs.microsoft.com/cpp/linux/download-install-and-setup-the-linux-development-workload).
 
 In addition we need to install the `gfortran` compiler:
 ```
@@ -41,14 +41,14 @@ To see the output you might need to open the *Linux Console Window* view.
 ## Cross-compile a Windows executable
 
 The mingw compiler can be used to create Windows binaries.
-On Debian you have to install
+Install an appropriate mingw package in the WSL installation, for example:
 ```
 sudo aptitude install gfortran-mingw-w64-x86-64
 ```
 
 ### Build the project for Windows
 
-Select the *WSL-MINGW-Release* target and build it.
+In Visual Studio select the *WSL-MINGW-Release* target and build it.
 
 After building the executable you still need to copy some DLLs into that folder.
 In the case of Debian these DLLs are provided by the mingw package:
